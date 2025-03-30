@@ -1,119 +1,108 @@
-# PrashantSaxe-StudyChamber
+# NewsSage
 
 ## Overview
-PrashantSaxe-StudyChamber is a **Django-based web application** designed to facilitate online study discussions. Users can join different study rooms, engage in conversations, and collaborate on various topics. The project follows the **MVC (Model-View-Controller) architecture**, making it modular and easy to extend.
+NewsSage is a **crowdsourced news platform** that enables local and aspiring publishers to post stories that mainstream media often overlooks. It provides real-time **news validation** through the Google Fact Check API and ensures **secure media uploads** via Cloudinary. 
 
 ## Features
-- **User Authentication**: Secure login and registration.
-- **Study Rooms**: Users can create and join topic-based discussion rooms.
-- **Real-time Conversations**: Engage in discussions with other users.
-- **Topic Categorization**: Rooms are organized based on study topics.
-- **Responsive UI**: Built using Django templates.
+- **Local News Contribution**: Users can submit and share news articles.
+- **Google Fact Check API Integration**: Real-time validation of news credibility.
+- **Secure Authentication**: Role-based access control for users and publishers.
+- **Media Uploads**: Secure handling of images and videos using Cloudinary.
+- **Real-time Updates**: Interactive UI built with React.js and Tailwind CSS.
 
 ---
 
 ## Tech Stack
-### Backend:
-- **Framework**: Django (Python)
-- **Database**: SQLite (default, can be extended to PostgreSQL)
-- **Authentication**: Django Authentication System
-- **Template Engine**: Django Templates
-
 ### Frontend:
-- **HTML & CSS**: Django template rendering
-- **JavaScript**: For interactive UI components
+- **Framework**: React.js (Vite setup)
+- **Styling**: Tailwind CSS
+- **State Management**: Context API
+- **Build Tool**: Vite
+
+### Backend:
+- **Framework**: Node.js with Express.js
+- **Database**: MongoDB
+- **Authentication**: JWT & role-based access control
+- **Middleware**: Auth & Publisher roles
 
 ### Deployment:
-- **Hosting**: Render / DigitalOcean / AWS
-- **Database**: SQLite (or PostgreSQL for production)
-- **CI/CD**: GitHub Actions (optional)
+- **Hosting**: Vercel
+- **Database**: MongoDB Atlas
+- **CI/CD**: GitHub Actions
 
 ---
 
 ## Directory Structure
 ```
-prashantsaxe-studychamber/
-├── README.md              # Project documentation
-├── db.sqlite3             # SQLite database file
-├── manage.py              # Django management script
-├── base/                  # Application logic
-│   ├── __init__.py
-│   ├── admin.py           # Admin panel configurations
-│   ├── apps.py            # App configuration
-│   ├── models.py          # Database models
-│   ├── tests.py           # Unit tests
-│   ├── urls.py            # URL routing
-│   ├── views.py           # Business logic
-│   ├── migrations/        # Database migrations
-│   └── __pycache__/       # Compiled Python files
-├── studyChamber/          # Main Django project settings
-│   ├── __init__.py
-│   ├── asgi.py            # ASGI configuration
-│   ├── settings.py        # Project settings
-│   ├── urls.py            # Root URL routing
-│   ├── wsgi.py            # WSGI configuration
-│   └── __pycache__/       # Compiled Python files
-└── templates/             # HTML templates for rendering pages
-    ├── home.html          # Home page template
-    ├── main.html          # Base template
-    └── room.html          # Room view template
+prashantsaxe-newzsage/
+│── front/               # Frontend source code
+│   ├── src/             # React source files
+│   ├── components/      # Reusable UI components
+│   ├── pages/           # Individual pages
+│   ├── hooks/           # Custom React hooks
+│   ├── context/         # Authentication and global state
+│   ├── public/          # Static assets
+│   ├── .env             # Environment variables
+│── server/              # Backend source code
+│   ├── controllers/     # Business logic for API endpoints
+│   ├── routes/          # API routes
+│   ├── models/          # MongoDB Schemas
+│   ├── middlewares/     # Authentication & authorization
+│   ├── dist/            # Compiled output
+│   ├── .env             # Backend environment variables
+│   ├── package.json     # Backend dependencies
 ```
 
 ---
 
 ## Setup Instructions
 ### Prerequisites:
-- Python 3.8+
-- Virtual Environment (recommended)
+- Node.js v16+
+- MongoDB Atlas or local MongoDB
+- Cloudinary Account (for media uploads)
 
 ### Installation
 1. **Clone the repository**
    ```sh
-
+   git clone https://github.com/anurag2204-k/newzSage.git
+   cd newzsage
    ```
 
-2. **Setup Virtual Environment**
+2. **Setup Frontend**
    ```sh
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   cd front
+   npm install
+   npm run dev
    ```
 
-3. **Install Dependencies**
+3. **Setup Backend**
    ```sh
-   pip install -r requirements.txt
+   cd server
+   npm install
+   npm start
    ```
 
-4. **Apply Migrations**
-   ```sh
-   python manage.py migrate
-   ```
-
-5. **Start the Development Server**
-   ```sh
-   python manage.py runserver
-   ```
-
-6. **Open in Browser**
-   ```
-   http://127.0.0.1:8000/
-   ```
+4. **Environment Variables**
+   - Create a `.env` file in both `front/` and `server/`.
+   - Fill in the required API keys (MongoDB, Cloudinary, etc.)
 
 ---
 
 ## API Endpoints
 ### **Authentication**
-- `POST /auth/signup/` - Register a new user
-- `POST /auth/login/` - Authenticate user
+- `POST /auth/signup` - Register a new user
+- `POST /auth/login` - Authenticate user
 
-### **Study Room Management**
-- `GET /rooms/` - Fetch all study rooms
-- `GET /rooms/:id/` - Get details of a specific room
-- `POST /rooms/create/` - Create a new study room
-- `DELETE /rooms/:id/` - Delete a study room (Admin only)
+### **News Management**
+- `GET /news/all` - Fetch all news articles
+- `GET /news/:id` - Get details of a specific news article
+- `POST /news/submit` - Submit a news article
+- `DELETE /news/:id` - Delete a news article (Admin only)
 
-### **Discussions**
-- `POST /rooms/:id/comment/` - Add a comment
-- `GET /rooms/:id/comments/` - Fetch comments
+### **Comments & Voting**
+- `POST /news/:id/comment` - Add a comment
+- `GET /news/:id/comments` - Fetch comments
+- `POST /news/:id/vote` - Upvote/downvote a news article
 
 ---
 
@@ -133,4 +122,5 @@ NO License.
 
 ## Contact
 For inquiries or collaboration, reach out:
-
+- **GitHub**:  [Anurag Khobragade](https://github.com/anurag2204-k) || 
+- **LinkedIn**:  [Anurag Khobragade](https://www.linkedin.com/in/anuragk22) ||
